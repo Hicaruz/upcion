@@ -1,7 +1,6 @@
 import { ID, Response } from '../../../../../../_metronic/helpers'
 export type User = {
 
-
   uid?: string
   first_name?: string
   second_name?: string
@@ -25,8 +24,6 @@ export type User = {
   interest?: string
   bank_account?: string
   bank_account_type?: string
-
-
 
   ben_first_name?: string
   ben_second_name?: string

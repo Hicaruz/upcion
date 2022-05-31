@@ -84,9 +84,42 @@ const inits: ICreateAccount = {
   ben_mobile_phone: "",
 
 }
-const createAccountSchemas = Object.keys(inits).map(key => Yup.object({
-  [key]: Yup.string().label(key),
-}))
+
+const createAccountSchemas = [
+  Yup.object({
+    first_name: Yup.string().required().label('First Name'),
+    second_name: Yup.string().required().label('Second Name'),
+    fisrt_last_name: Yup.string().required().label('First Last Name'),
+    second_last_name: Yup.string().required().label('Second last Name'),
+    born_date: Yup.string().required().label('Born Date'),
+    email: Yup.string().email().required().label('Born Date'),
+    personal_document: Yup.string().required().label('Personal Document'),
+    address: Yup.string().required().label('Address'),
+    departament: Yup.string().required().label('Departament'),
+    municip: Yup.string().required().label('Area'),
+    home_phone: Yup.string().required().label('Home Phone'),
+    mobile_phone: Yup.string().required().label('Mobile Phone'),
+  }),
+  Yup.object({
+    amount: Yup.number().required().label('Amount'),
+    bank: Yup.string().required().label('Bank'),
+    bank_account: Yup.string().required().label('Bank Account'),
+    bank_account_type: Yup.string().required().label('Bank Account Type'),
+  }),
+  Yup.object({
+    ben_first_name: Yup.string().required().label('First Name'),
+    ben_second_name: Yup.string().required().label('Second Name'),
+    ben_fisrt_last_name: Yup.string().required().label('First Last Name'),
+    ben_second_last_name: Yup.string().required().label('Second last Name'),
+    ben_born_date: Yup.string().required().label('Born Date'),
+    ben_email: Yup.string().email().required().label('Born Date'),
+    ben_personal_document: Yup.string().required().label('Personal Document'),
+    ben_address: Yup.string().required().label('Address'),
+    ben_departament: Yup.string().required().label('Departament'),
+    ben_municip: Yup.string().required().label('Area'),
+    ben_mobile_phone: Yup.string().required().label('Mobile Phone'),
+  }),
+]
 
 
 export { createAccountSchemas, inits }

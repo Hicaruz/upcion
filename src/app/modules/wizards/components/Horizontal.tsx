@@ -1,10 +1,8 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { Step1 } from './steps/Step1'
 import { Step2 } from './steps/Step2'
 import { Step3 } from './steps/Step3'
 import { Step4 } from './steps/Step4'
-import { Step5 } from './steps/Step5'
-import { KTSVG } from '../../../../_metronic/helpers'
+import { KTSVG, toAbsoluteUrl } from '../../../../_metronic/helpers'
 import { StepperComponent } from '../../../../_metronic/assets/ts/components'
 import { Formik, Form, FormikValues } from 'formik'
 import { createAccountSchemas, ICreateAccount, inits } from './CreateAccountWizardHelper'
@@ -45,7 +43,7 @@ const Horizontal: FC = () => {
     setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
 
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex])
-    
+
 
 
     if (stepper.current.currentStepIndex !== stepper.current.totatStepsNumber) {
@@ -77,7 +75,8 @@ const Horizontal: FC = () => {
 
   return (
     <div className='container pt-5'>
-      LOGO
+      <img alt='Logo' src={toAbsoluteUrl('/media/logos/favicon.png')} className='h-30px mb-5' />
+
       <div className='card'>
         <div className='card-body'>
           <div

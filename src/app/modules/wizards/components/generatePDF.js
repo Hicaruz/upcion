@@ -1,30 +1,21 @@
 
-import React from "react";
 import jsPDF from "jspdf";
 
 import background from "./UPCION_FichaDatos-1.jpg"
 import moment from "moment"
-const rect = (doc, x, y, w, h) => {
 
-    doc.setDrawColor(191, 191, 191);
-    doc.setLineWidth(0.25)
-    doc.line(x, y, x + w, y)
-    doc.line(x, y + h, x + w, y + h)
-    doc.line(x, y, x, y + h)
-    doc.line(x + w, y, x + w, y + h)
-}
 
-function moneyFormat(value) {
-    if (typeof value === "string") {
-        return process.env.REACT_APP_CURRENCY + (value.replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+// function moneyFormat(value) {
+//     if (typeof value === "string") {
+//         return process.env.REACT_APP_CURRENCY + (value.replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 
-    }
-    return process.env.REACT_APP_CURRENCY + value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-}
-function unitFormat(value) {
+//     }
+//     return process.env.REACT_APP_CURRENCY + value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+// }
+// function unitFormat(value) {
 
-    return value.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-}
+//     return value.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+// }
 let baseyheaders = 91.5
 let yheaders = 91.5
 

@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom'
 // Axios
-import axios from 'axios'
 import {Chart, registerables} from 'chart.js'
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
@@ -19,7 +18,7 @@ import {MetronicI18nProvider} from './_metronic/i18n/Metronici18n'
 import './_metronic/assets/sass/style.scss'
 import './_metronic/assets/sass/style.react.scss'
 import {AppRoutes} from './app/routing/AppRoutes'
-import {AuthProvider, setupAxios} from './app/modules/auth'
+import {AuthProvider} from './app/modules/auth'
 
 // setupAxios(axios)
 

@@ -1,13 +1,8 @@
 import { FC, useState, useEffect } from 'react'
-import * as Yup from 'yup'
-import { useFormik } from 'formik'
-import { isNotEmpty, toAbsoluteUrl } from '../../../../../../_metronic/helpers'
-import { initialUser, User } from '../core/_models'
+
+import {  User } from '../core/_models'
 import clsx from 'clsx'
-import { useListView } from '../core/ListViewProvider'
-import { UsersListLoading } from '../components/loading/UsersListLoading'
-import { createUser, updateUser } from '../core/_requests'
-import { useQueryResponse } from '../core/QueryResponseProvider'
+
 import moment from "moment"
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
@@ -18,9 +13,8 @@ type Props = {
 
 
 
-const UserEditModalForm: FC<Props> = ({ user, isUserLoading }) => {
-  const { setItemIdForUpdate } = useListView()
-  const { refetch } = useQueryResponse()
+const UserEditModalForm: FC<Props> = () => {
+
   const [copied, setCopied] = useState(false)
   useEffect(() => {
     if (!copied) {
@@ -36,7 +30,7 @@ const UserEditModalForm: FC<Props> = ({ user, isUserLoading }) => {
 
 
   const getUrl = window.location;
-  const baseUrl = getUrl .protocol + "//" + getUrl.host 
+  const baseUrl = getUrl.protocol + "//" + getUrl.host 
   const url = baseUrl+"/form?time=" + moment().format("DDMMYYYYHHmmss")
   return (
     <>
@@ -76,7 +70,7 @@ const UserEditModalForm: FC<Props> = ({ user, isUserLoading }) => {
         {/* begin::Actions */}
         <div className='text-center pt-15'>
         <CopyToClipboard text={url} onCopy={() => setCopied(true)}>
-              <a className='highlight-copy btn btn-light'>{copied ? 'Copiado' : 'Copiar'}</a>
+              <span className='highlight-copy btn btn-light'>{copied ? 'Copiado' : 'Copiar'}</span>
             </CopyToClipboard>
 
 

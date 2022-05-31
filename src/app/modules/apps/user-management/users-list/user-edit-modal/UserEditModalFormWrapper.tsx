@@ -9,8 +9,6 @@ const UserEditModalFormWrapper = () => {
   const enabledQuery: boolean = isNotEmpty(itemIdForUpdate)
   const {
     isLoading,
-    data: user,
-    error,
   } = useQuery(
     `${QUERIES.USERS_LIST}-user-${itemIdForUpdate}`,
     () => {
@@ -34,7 +32,6 @@ const UserEditModalFormWrapper = () => {
   //   return <UserEditModalForm isUserLoading={isLoading} user={user} />
   // }
 
-  return null
 }
 
 export {UserEditModalFormWrapper}
