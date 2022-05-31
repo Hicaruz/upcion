@@ -64,13 +64,13 @@ export function Login() {
     >
       {/* begin::Heading */}
       <div className='text-center mb-10'>
-        <h1 className='text-dark mb-3'>Sign In to Metronic</h1>
-        <div className='text-gray-400 fw-bold fs-4'>
+        <h1 className='text-dark mb-3'>Sign In to Upcion</h1>
+        {/* <div className='text-gray-400 fw-bold fs-4'>
           New Here?{' '}
           <Link to='/auth/registration' className='link-primary fw-bolder'>
             Create an Account
           </Link>
-        </div>
+        </div> */}
       </div>
       {/* begin::Heading */}
 

@@ -11,6 +11,7 @@ import {PrivateRoutes} from './PrivateRoutes'
 import {ErrorsPage} from '../modules/errors/ErrorsPage'
 import {Logout, AuthPage, useAuth} from '../modules/auth'
 import {App} from '../App'
+import {Horizontal} from '../modules/wizards/components/Horizontal'
 
 /**
  * Base URL of the website.
@@ -27,6 +28,8 @@ const AppRoutes: FC = () => {
         <Route element={<App />}>
           <Route path='error/*' element={<ErrorsPage />} />
           <Route path='logout' element={<Logout />} />
+          <Route path='form/*' element={<Horizontal />} />
+
           {currentUser ? (
             <>
               <Route path='/*' element={<PrivateRoutes />} />
@@ -35,6 +38,7 @@ const AppRoutes: FC = () => {
           ) : (
             <>
               <Route path='auth/*' element={<AuthPage />} />
+
               <Route path='*' element={<Navigate to='/auth' />} />
             </>
           )}

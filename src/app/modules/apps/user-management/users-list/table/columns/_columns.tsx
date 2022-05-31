@@ -20,28 +20,25 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     Cell: ({...props}) => <UserInfoCell user={props.data[props.row.index]} />,
   },
   {
-    Header: (props) => <UserCustomHeader tableProps={props} title='Role' className='min-w-125px' />,
-    accessor: 'role',
+    Header: (props) => <UserCustomHeader tableProps={props} title='Address' className='min-w-125px' />,
+    accessor: 'address',
   },
   {
-    Header: (props) => (
-      <UserCustomHeader tableProps={props} title='Last login' className='min-w-125px' />
-    ),
-    id: 'last_login',
-    Cell: ({...props}) => <UserLastLoginCell last_login={props.data[props.row.index].last_login} />,
+    Header: (props) => (<UserCustomHeader tableProps={props} title='Mobile Phone' className='min-w-125px' />),
+    accessor: 'mobile_phone',
+
   },
   {
-    Header: (props) => (
-      <UserCustomHeader tableProps={props} title='Two steps' className='min-w-125px' />
-    ),
-    id: 'two_steps',
-    Cell: ({...props}) => <UserTwoStepsCell two_steps={props.data[props.row.index].two_steps} />,
+    Header: (props) => (<UserCustomHeader tableProps={props} title='Amount' className='min-w-125px' />),
+    accessor: 'amount',
+
   },
+
   {
     Header: (props) => (
       <UserCustomHeader tableProps={props} title='Joined day' className='min-w-125px' />
     ),
-    accessor: 'joined_day',
+    accessor: 'write',
   },
   {
     Header: (props) => (

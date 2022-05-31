@@ -1,61 +1,92 @@
 import * as Yup from 'yup'
 
 export interface ICreateAccount {
-  accountType: string
-  accountTeamSize: string
-  accountName: string
-  accountPlan: string
-  businessName: string
-  businessDescriptor: string
-  businessType: string
-  businessDescription: string
-  businessEmail: string
-  nameOnCard: string
-  cardNumber: string
-  cardExpiryMonth: string
-  cardExpiryYear: string
-  cardCvv: string
-  saveCard: string
+  first_name?: string
+  second_name?: string
+  fisrt_last_name?: string
+  second_last_name?: string
+
+  born_date?: string
+  personal_document?: string
+  address?: string
+  profesion?: string
+  departament?: string
+  municip?: string
+  home_phone?: string
+  mobile_phone?: string
+
+  email?: string
+  ben_email?: string
+  amount?: string
+  time?: string
+  bank?: string
+  interest?: string
+  bank_account?: string
+  bank_account_type?: string
+
+
+
+  ben_first_name?: string
+  ben_second_name?: string
+  ben_fisrt_last_name?: string
+  ben_second_last_name?: string
+
+  ben_born_date?: string
+  ben_personal_document?: string
+  ben_address?: string
+  ben_profesion?: string
+  ben_departament?: string
+  ben_municip?: string
+  ben_percent?: string
+  ben_mobile_phone?: string
 }
 
-const createAccountSchemas = [
-  Yup.object({
-    accountType: Yup.string().required().label('Account Type'),
-  }),
-  Yup.object({
-    accountName: Yup.string().required().label('Account Name'),
-  }),
-  Yup.object({
-    businessName: Yup.string().required().label('Business Name'),
-    businessDescriptor: Yup.string().required().label('Shortened Descriptor'),
-    businessType: Yup.string().required().label('Corporation Type'),
-    businessEmail: Yup.string().required().label('Contact Email'),
-  }),
-  Yup.object({
-    nameOnCard: Yup.string().required().label('Name On Card'),
-    cardNumber: Yup.string().required().label('Card Number'),
-    cardExpiryMonth: Yup.string().required().label('Expiration Month'),
-    cardExpiryYear: Yup.string().required().label('Expiration Year'),
-    cardCvv: Yup.string().required().label('CVV'),
-  }),
-]
+
 
 const inits: ICreateAccount = {
-  accountType: 'personal',
-  accountTeamSize: '50+',
-  accountName: '',
-  accountPlan: '1',
-  businessName: 'Keenthemes Inc.',
-  businessDescriptor: 'KEENTHEMES',
-  businessType: '1',
-  businessDescription: '',
-  businessEmail: 'corp@support.com',
-  nameOnCard: 'Max Doe',
-  cardNumber: '4111 1111 1111 1111',
-  cardExpiryMonth: '1',
-  cardExpiryYear: '2025',
-  cardCvv: '123',
-  saveCard: '1',
-}
+  first_name: "",
+  second_name: "",
+  fisrt_last_name: "",
+  second_last_name: "",
 
-export {createAccountSchemas, inits}
+  born_date: "",
+  personal_document: "",
+  address: "",
+  profesion: "",
+  departament: "",
+  municip: "",
+  home_phone: "",
+  mobile_phone: "",
+
+  email: "",
+  ben_email: "",
+
+  amount: "",
+  time: "12 Meses",
+  bank: "",
+  interest: "7%",
+  bank_account: "",
+  bank_account_type: "",
+
+
+  ben_first_name: "",
+  ben_second_name: "",
+  ben_fisrt_last_name: "",
+  ben_second_last_name: "",
+
+  ben_born_date: "",
+  ben_personal_document: "",
+  ben_address: "",
+  ben_profesion: "",
+  ben_departament: "",
+  ben_municip: "",
+  ben_percent: "100%",
+  ben_mobile_phone: "",
+
+}
+const createAccountSchemas = Object.keys(inits).map(key => Yup.object({
+  [key]: Yup.string().label(key),
+}))
+
+
+export { createAccountSchemas, inits }

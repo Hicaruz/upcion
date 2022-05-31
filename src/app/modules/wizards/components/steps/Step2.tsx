@@ -1,207 +1,107 @@
-import React, {FC} from 'react'
-import {KTSVG} from '../../../../../_metronic/helpers'
-import {Field, ErrorMessage} from 'formik'
+import React, { FC } from 'react'
+import { Field, ErrorMessage, useFormikContext } from 'formik'
 
 const Step2: FC = () => {
+
+  const deps = ["GUATEMALA", "EL PROGRESO", "SACATEPEQUEZ", "CHIMALTENANGO", "ESCUINTLA", "SANTA ROSA", "SOLOLA", "TOTONICAPAN", "QUETZALTENANGO", "SUCHITEPEQUEZ", "RETALHULEU", "SAN MARCOS", "HUEHUETENANGO", "QUICHE", "BAJA VERAPAZ", "ALTA VERAPAZ", "PETEN", "IZABAL", "ZACAPA", "CHIQUIMULA", "JALAPA", "JUTIAPA"];
+  const munis: any = {
+    guatemala: ["GUATEMALA", "SANTA CATARINA PINULA", "SAN JOSE PINULA", "SAN JOSE DEL GOLFO", "PALENCIA", "CHINAUTLA", "SAN PEDRO AYAMPUC", "MIXCO", "SAN PEDRO SACATEPEQUEZ", "SAN JUAN SACATEPEQUEZ", "SAN RAYMUNDO", "CHUARRANCHO", "FRAIJANES", "AMATITLAN", "VILLA NUEVA", "VILLA CANALES", "SAN MIGUEL PETAPA"],
+    'el progreso': ["GUASTATOYA", "MORAZAN", "SAN AGUSTIN ACASAGUASTLAN", "SAN CRISTOBAL ACASAGUASTLAN", "EL JICARO", "SANSARE", "SANARATE", "SAN ANTONIO LA PAZ"],
+    sacatepequez: ["ANTIGUA", "JOCOTENANGO", "PASTORES", "SUMPANGO", "SANTO DOMINGO XENACOJ", "SANTIAGO SACATEPEQUEZ", "SAN BARTOLOME MILPAS ALTAS", "SAN LUCAS SACATEPEQUEZ", "SANTA LUCIA MILPAS ALTAS", "MAGDALENA MILPAS ALTAS", "SANTA MARIA DE JESUS", "CIUDAD VIEJA", "SAN MIGUEL DUENAS", "ALOTENANGO", "SAN ANTONIO AGUAS CALIENTES", "SANTA CATARINA BARAHONA"],
+    chimaltenango: ["CHIMALTENANGO", "SAN JOSE POAQUIL", "SAN MARTIN JILOTEPEQUE", "SAN JUAN COMALAPA", "SANTA APOLONIA", "TECPAN GUATEMALA", "PATZUN", "SAN MIGUEL POCHUTA", "PATZICIA", "SANTA CRUZ BALANYA", "ACATENANGO", "SAN PEDRO YEPOCAPA", "SAN ANDRES ITZAPA", "PARRAMOS", "ZARAGOZA", "EL TEJAR"],
+    escuintla: ["ESCUINTLA", "SANTA LUCIA COTZUMALGUAPA", "LA DEMOCRACIA", "SIQUINALA", "MASAGUA", "TIQUISATE", "LA GOMERA", "GUANAGAZAPA", "SAN JOSE", "IZTAPA", "PALIN", "SAN VICENTE PACAYA"],
+    'santa rosa': ["CUILAPA", "BARBERENA", "SANTA ROSA DE LIMA", "CASILLAS", "SAN RAFAEL LAS FLORES", "ORATORIO", "SAN JUAN TECUACO", "CHIQUIMULILLA", "TAXISCO", "SANTA MARIA IXHUATAN", "GUAZACAPAN", "SANTA CRUZ NARANJO", "municipio NUEVO VIÑAS", "NUEVA SANTA ROSA"],
+    solola: ["SOLOLA", "SAN JOSE CHACAYA", "SANTA MARIA VISITACION", "SANTA LUCIA UTATLAN", "NAHUALA", "SANTA CATARINA IXTAHUACAN", "SANTA CLARA LA LAGUNA", "CONCEPCION", "SAN ANDRES SEMETABAJ", "PANAJACHEL", "SANTA CATARINA PALOPO", "SAN ANTONIO PALOPO", "SAN LUCAS TOLIMAN", "SANTA CRUZ LA LAGUNA", "SAN PABLO LA LAGUNA", "SAN MARCOS LA LAGUNA", "SAN JUAN LA LAGUNA", "SAN PEDRO LA LAGUNA", "SANTIAGO ATITLAN"],
+    totonicapan: ["TOTONICAPAN", "SAN CRISTOBAL TOTONICAPAN", "SAN FRANCISCO EL ALTO", "SAN ANDRES XECUL", "MOMOSTENANGO", "SANTA MARIA CHIQUIMULA", "SANTA LUCIA LA REFORMA", "SAN BARTOLO AGUAS CALIENTES"],
+    quetzaltenango: ["QUETZALTENANGO", "SALCAJA", "OLINTEPEQUE", "SAN CARLOS SIJA", "SIBILIA", "CABRICAN", "CAJOLA", "SAN MIGUEL SIGUILA", "SAN JUAN OSTUNCALCO", "SAN MATEO", "CONCEPCION CHIQUIRICHAPA", "SAN MARTIN SACATEPEQUEZ", "ALMOLONGA", "CANTEL", "HUITAN", "ZUNIL", "COLOMBA COSTA CUCA", "SAN FRANCISCO LA UNION", "EL PALMAR", "COATEPEQUE", "GENOVA COSTA CUCA", "FLORES COSTA CUCA", "LA ESPERANZA", "PALESTINA DE LOS ALTOS"],
+    suchitepequez: ["MAZATENANGO", "CUYOTENANGO", "SAN FRANCISCO ZAPOTITLAN", "SAN BERNARDINO", "SAN JOSE EL IDOLO", "SANTO DOMINGO SUCHITEPEQUEZ", "SAN LORENZO", "SAMAYAC", "SAN PABLO JOCOPILAS", "SAN ANTONIO SUCHITEPEQUEZ", "SAN MIGUEL PANAM", "SAN GABRIEL", "CHICACAO", "PATULUL", "SANTA BARBARA", "SAN JUAN BAUTISTA", "SANTO TOMAS LA UNION", "ZUNILITO", "municipio NUEVO", "RIO BRAVO"],
+    retalhuleu: ["RETALHULEU", "SAN SEBASTIAN", "SANTA CRUZ MULUA", "SAN MARTIN ZAPOTITLAN", "SAN FELIPE", "SAN ANDRES VILLA SECA", "CHAMPERICO", "NUEVO SAN CARLOS", "EL ASINTAL"],
+    'san marcos': ["SAN MARCOS", "SAN PEDRO SACATEPEQUEZ", "SAN ANTONIO SACATEPEQUEZ", "COMITANCILLO", "SAN MIGUEL IXTAHUACAN", "CONCEPCION TUTUAPA", "TACANA", "SIBINAL", "TAJUMULCO", "TEJUTLA", "SAN RAFAEL PIE DE LA CUESTA", "NUEVO PROGRESO", "EL TUMBADOR", "SAN JOSE EL RODEO", "MALACATAN", "CATARINA", "AYUTLA (TECUN UMAN)", "OCOS", "SAN PABLO", "EL QUETZAL", "LA REFORMA", "PAJAPITA", "IXCHIGUAN", "SAN JOSE OJETENAN", "SAN CRISTOBAL CUCHO", "SIPACAPA", "ESQUIPULAS PALO GORDO", "RIO BLANCO", "SAN LORENZO"],
+    huehuetenango: ["HUEHUETENANGO", "CHIANTLA", "MALACATANCITO", "CUILCO", "NENTON", "SAN PEDRO NECTA", "JACALTENANGO", "SAN PEDRO SOLOMA", "SAN ILDEFONSO IXTAHUACAN", "SANTA BARBARA", "LA LIBERTAD", "LA DEMOCRACIA", "SAN MIGUEL ACATAN", "SAN RAFAEL LA INDEPENDENCIA", "TODOS SANTOS CUCHUMATAN", "SAN JUAN ATITAN", "SANTA EULALIA", "SAN MATEO IXTATAN", "COLOTENANGO", "SAN SEBASTIAN HUEHUETENANGO", "TECTITAN", "CONCEPCION HUISTA", "SAN JUAN IXCOY", "SAN ANTONIO HUISTA", "SAN SEBASTIAN COATAN", "SANTA CRUZ BARILLAS", "AGUACATAN", "SAN RAFAEL PETZAL", "SAN GASPAR IXCHIL", "SANTIAGO CHIMALTENANGO", "SANTA ANA HUISTA", "UNIÓN CANTINIL"],
+    quiche: ["SANTA CRUZ DEL QUICHE", "CHICHE", "CHINIQUE", "ZACUALPA", "CHAJUL", "STO TOMAS CHICHICASTENANGO", "PATZITE", "SAN ANTONIO ILOTENANGO", "SAN PEDRO JOCOPILAS", "CUNEN", "SAN JUAN COTZAL", "JOYABAJ", "NEBAJ", "SAN ANDRES SAJCABAJA", "SAN MIGUEL USPANTAN", "SACAPULAS", "SAN BARTOLOME JOCOTENANGO", "CANILLA", "CHICAMAN", "IXCAN", "PACHALUN", "PLAYA GRANDE"],
+    'baja verapaz': ["SALAMA", "SAN MIGUEL CHICAJ", "RABINAL", "CUBULCO", "GRANADOS", "SANTA CRUZ EL CHOL", "SAN JERONIMO", "PURULHA"],
+    'alta verapaz': ["COBAN", "SANTA CRUZ VERAPAZ", "SAN CRISTOBAL VERAPAZ", "TACTIC", "TAMAHU", "SAN MIGUEL TUCURU", "PANZOS", "SENAHU", "SAN PEDRO CARCHA", "SAN JUAN CHAMELCO", "LANQUIN", "SANTA MARIA CAHABON", "CHISEC", "CHAHAL", "FRAY BARTOLOME DE LAS CASAS", "LA TINTA", "RAXRUHÁ"],
+    peten: ["FLORES", "SAN JOSE", "SAN BENITO", "SAN ANDRES", "LA LIBERTAD", "SAN FRANCISCO", "SANTA ANA", "DOLORES", "SAN LUIS", "SAYAXCHE", "MELCHOR DE MENCOS", "POPTUN"],
+    izabal: ["PUERTO BARRIOS", "LIVINGSTON", "EL ESTOR", "MORALES", "LOS AMATES"],
+    zacapa: ["ZACAPA", "ESTANZUELA", "RIO HONDO", "GUALAN", "TECULUTAN", "USUMATLAN", "CABANAS", "SAN DIEGO", "LA UNION", "HUITE"],
+    chiquimula: ["CHIQUIMULA", "SAN JOSE LA ARADA", "SAN JUAN LA ERMITA", "JOCOTAN", "CAMOTAN", "OLOPA", "ESQUIPULAS", "CONCEPCION LAS MINAS", "QUEZALTEPEQUE", "SAN JACINTO", "IPALA"],
+    jalapa: ["JALAPA", "SAN PEDRO PINULA", "SAN LUIS JILOTEPEQUE", "SAN MANUEL CHAPARRON", "SAN CARLOS ALZATATE", "MONJAS", "MATAQUESCUINTLA"],
+    jutiapa: ["JUTIAPA", "EL PROGRESO", "SANTA CATARINA MITA", "AGUA BLANCA", "ASUNCION MITA", "YUPILTEPEQUE", "ATESCATEMPA", "JEREZ", "EL ADELANTO", "ZAPOTITLAN", "COMAPA", "JALPATAGUA", "CONGUACO", "MOYUTA", "PASACO", "SAN JOSE ACATEMPA", "QUESADA"]
+  }
+
+
+  const {
+    values,
+  }: any = useFormikContext();
+
   return (
     <div className='w-100'>
-      <div className='pb-10 pb-lg-15'>
-        <h2 className='fw-bolder text-dark'>Account Info</h2>
 
-        <div className='text-gray-400 fw-bold fs-6'>
-          If you need more info, please check out
-          <a href='/dashboard' className='link-primary fw-bolder'>
-            {' '}
-            Help Page
-          </a>
-          .
+      <div className='fv-row mb-10'>
+        <div className='row'>
+          <div className='col-md-6 col-sm-12'>
+            <label className='form-label required'>Monto a Invertir</label>
+
+            <Field name='amount' className='form-control form-control-lg form-control-solid' />
+            <div className='text-danger mt-2'>
+              <ErrorMessage name='amount' />
+            </div>
+          </div>
+          <div className='col-md-6 col-sm-12'>
+            <label className='form-label required'>Plazo de Inversion</label>
+
+            <Field disabled name='time' className='form-control form-control-lg form-control-solid' />
+            <div className='text-danger mt-2'>
+              <ErrorMessage name='time' />
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className='mb-10 fv-row'>
-        <label className='d-flex align-items-center form-label mb-3'>
-          Specify Team Size
-          <i
-            className='fas fa-exclamation-circle ms-2 fs-7'
-            data-bs-toggle='tooltip'
-            title='Provide your team size to help us setup your billing'
-          ></i>
-        </label>
+      <div className='fv-row mb-10'>
+        <div className='row'>
+          <div className='col-md-6 col-sm-12'>
+            <label className='form-label required'>Entidad Bancaria</label>
 
-        <div className='row mb-2' data-kt-buttons='true'>
-          <div className='col'>
-            <Field
-              type='radio'
-              className='btn-check'
-              name='accountTeamSize'
-              value='1-1'
-              id='kt_account_team_size_select_1'
-            />
-            <label
-              className='btn btn-outline btn-outline-dashed btn-outline-default w-100 p-4'
-              htmlFor='kt_account_team_size_select_1'
-            >
-              <span className='fw-bolder fs-3'>1-1</span>
-            </label>
+            <Field name='bank' className='form-control form-control-lg form-control-solid' />
+            <div className='text-danger mt-2'>
+              <ErrorMessage name='bank' />
+            </div>
           </div>
+          <div className='col-md-6 col-sm-12'>
+            <label className='form-label required'>Interes Mensual</label>
 
-          <div className='col'>
-            <Field
-              type='radio'
-              className='btn-check'
-              name='accountTeamSize'
-              value='2-10'
-              id='kt_account_team_size_select_2'
-            />
-            <label
-              className='btn btn-outline btn-outline-dashed btn-outline-default w-100 p-4'
-              htmlFor='kt_account_team_size_select_2'
-            >
-              <span className='fw-bolder fs-3'>2-10</span>
-            </label>
+            <Field disabled name='interest' className='form-control form-control-lg form-control-solid' />
+            <div className='text-danger mt-2'>
+              <ErrorMessage name='interest' />
+            </div>
           </div>
-
-          <div className='col'>
-            <Field
-              type='radio'
-              className='btn-check'
-              name='accountTeamSize'
-              value='10-50'
-              id='kt_account_team_size_select_3'
-            />
-            <label
-              className='btn btn-outline btn-outline-dashed btn-outline-default w-100 p-4'
-              htmlFor='kt_account_team_size_select_3'
-            >
-              <span className='fw-bolder fs-3'>10-50</span>
-            </label>
-          </div>
-
-          <div className='col'>
-            <Field
-              type='radio'
-              className='btn-check'
-              name='accountTeamSize'
-              value='50+'
-              id='kt_account_team_size_select_4'
-            />
-            <label
-              className='btn btn-outline btn-outline-dashed btn-outline-default w-100 p-4'
-              htmlFor='kt_account_team_size_select_4'
-            >
-              <span className='fw-bolder fs-3'>50+</span>
-            </label>
-          </div>
-        </div>
-
-        <div className='form-text'>
-          Customers will see this shortened version of your statement descriptor
         </div>
       </div>
 
-      <div className='mb-10 fv-row'>
-        <label className='form-label mb-3'>Team Account Name</label>
+      <div className='fv-row mb-10'>
+        <div className='row'>
+          <div className='col-md-6 col-sm-12'>
+            <label className='form-label required'>No. Cuenta Bancaria</label>
 
-        <Field
-          type='text'
-          className='form-control form-control-lg form-control-solid'
-          name='accountName'
-        />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='accountName' />
+            <Field name='bank_account' className='form-control form-control-lg form-control-solid' />
+            <div className='text-danger mt-2'>
+              <ErrorMessage name='bank_account' />
+            </div>
+          </div>
+          <div className='col-md-6 col-sm-12'>
+            <label className='form-label required'>Tipo de Cuenta</label>
+
+            <Field name='bank_account_type' className='form-control form-control-lg form-control-solid' />
+            <div className='text-danger mt-2'>
+              <ErrorMessage name='bank_account_type' />
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className='mb-0 fv-row'>
-        <label className='d-flex align-items-center form-label mb-5'>
-          Select Account Plan
-          <i
-            className='fas fa-exclamation-circle ms-2 fs-7'
-            data-bs-toggle='tooltip'
-            title='Monthly billing will be based on your account plan'
-          ></i>
-        </label>
-
-        <div className='mb-0'>
-          <label className='d-flex flex-stack mb-5 cursor-pointer'>
-            <span className='d-flex align-items-center me-2'>
-              <span className='symbol symbol-50px me-6'>
-                <span className='symbol-label'>
-                  <KTSVG
-                    path='/media/icons/duotune/finance/fin001.svg'
-                    className='svg-icon-1 svg-icon-gray-600'
-                  />
-                </span>
-              </span>
-
-              <span className='d-flex flex-column'>
-                <span className='fw-bolder text-gray-800 text-hover-primary fs-5'>
-                  Company Account
-                </span>
-                <span className='fs-6 fw-bold text-gray-400'>
-                  Use images to enhance your post flow
-                </span>
-              </span>
-            </span>
-
-            <span className='form-check form-check-custom form-check-solid'>
-              <Field className='form-check-input' type='radio' name='accountPlan' value='1' />
-            </span>
-          </label>
-
-          <label className='d-flex flex-stack mb-5 cursor-pointer'>
-            <span className='d-flex align-items-center me-2'>
-              <span className='symbol symbol-50px me-6'>
-                <span className='symbol-label'>
-                  <KTSVG
-                    path='/media/icons/duotune/graphs/gra006.svg'
-                    className='svg-icon-1 svg-icon-gray-600'
-                  />
-                </span>
-              </span>
-
-              <span className='d-flex flex-column'>
-                <span className='fw-bolder text-gray-800 text-hover-primary fs-5'>
-                  Developer Account
-                </span>
-                <span className='fs-6 fw-bold text-gray-400'>Use images to your post time</span>
-              </span>
-            </span>
-
-            <span className='form-check form-check-custom form-check-solid'>
-              <Field className='form-check-input' type='radio' name='accountPlan' value='2' />
-            </span>
-          </label>
-
-          <label className='d-flex flex-stack mb-0 cursor-pointer'>
-            <span className='d-flex align-items-center me-2'>
-              <span className='symbol symbol-50px me-6'>
-                <span className='symbol-label'>
-                  <KTSVG
-                    path='/media/icons/duotune/graphs/gra008.svg'
-                    className='svg-icon-1 svg-icon-gray-600'
-                  />
-                </span>
-              </span>
-
-              <span className='d-flex flex-column'>
-                <span className='fw-bolder text-gray-800 text-hover-primary fs-5'>
-                  Testing Account
-                </span>
-                <span className='fs-6 fw-bold text-gray-400'>
-                  Use images to enhance time travel rivers
-                </span>
-              </span>
-            </span>
-
-            <span className='form-check form-check-custom form-check-solid'>
-              <Field className='form-check-input' type='radio' name='accountPlan' value='3' />
-            </span>
-          </label>
-        </div>
-      </div>
     </div>
   )
 }
 
-export {Step2}
+export { Step2 }
